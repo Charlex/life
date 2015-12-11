@@ -1,0 +1,10 @@
+{% extends 'house_finances/base.html' %}
+{% load humanize %}
+
+{% block contents %}
+	{% for roomie in roomies %}
+		<a class="roommate" href="roommate/?id={{ roomie.id }}">
+			<h2>{{ roomie.name }}</h2>
+		</a>
+	{% endfor %}
+{% endblock %}

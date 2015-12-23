@@ -1,0 +1,19 @@
+{% extends 'house_finances/base.html' %}
+{% load humanize %}
+
+{% block contents %}
+	<div class="detail">
+		<h2>{{ item.name }}</h2>
+		<p></p>
+		<ul class="debts">
+				<li>
+					<u>Total owed: ${{ item.amount_still_owed|intcomma }}</u>
+				</li>
+			{% for debt in item.debts %}
+				<li>
+					{{ debt.debtor }} owes {{ debt.creditor }} ${{ debt.amount_still_owed }}
+				</li>
+			{% endfor %}
+		</ul>
+	</div>
+{% endblock %}

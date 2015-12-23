@@ -33,6 +33,10 @@ class Roomie(LifeBase):
     def total_owed(self):
         return sum(debt.amount_still_owed for debt in self.debts)
 
+    @property
+    def total_paid(self):
+        return sum(debt.payment_sum for debt in self.debts)
+
     def __unicode__(self):
         return self.name
 
@@ -46,6 +50,35 @@ class Item(LifeBase):
     """
     name = models.CharField(max_length=500)
     amount = models.DecimalField(max_digits=500,decimal_places=2)
+    date_bought = models.DateField(editable=True)
+
+    class Meta:
+        ordering = ('-date_bought', 'name')
+
+    @property
+    def debts(self):
+        return Debt.objects.filter(item=self)
+
+    @property
+    def payment_sum(self):
+        return sum([debt.amount for debt in self.debts])
+
+    @property
+    def amount_still_owed(self):
+        return sum([debt.amount_still_owed for debt in self.debts])
+
+    @property
+    def paid_for(self):
+        return self.amount_still_owed == 0
+
+    @property
+    def creditors(self):
+        return [debt.creditor for debt in self.debts]
+
+    @property
+    def debtors(self):
+        return [debt.debtor for debt in self.debts]
+
 
     def __unicode__(self):
         return self.name
@@ -59,6 +92,11 @@ class Debt(LifeBase):
     creditor = models.ForeignKey(Roomie, related_name="+", default=1)
     debtor = models.ForeignKey(Roomie, related_name="+")
     amount = models.DecimalField(max_digits=500,decimal_places=2)
+    date_began = models.DateField(editable=True)
+    date_due = models.DateField(blank=True,null=True)
+
+    class Meta:
+        ordering = ('-date_began', 'item')
 
     @property
     def amount_still_owed(self):
@@ -89,7 +127,7 @@ class Debt(LifeBase):
 
 
     def __unicode__(self):
-        return "%s's %s owed to %s" % (self.debtor.name, self.item.name, self.creditor.name)
+        return "%s owes $%i to %s for %s" % (self.debtor.name, self.amount_still_owed, self.creditor.name, self.item.name)
 
 
 class Payment(LifeBase):
@@ -98,9 +136,15 @@ class Payment(LifeBase):
     """
     debt = models.ForeignKey(Debt)
     amount = models.DecimalField(max_digits=500,decimal_places=2)
+    date_paid = models.DateField(auto_now_add=True)
 
     def __unicode__(self):
-        return "$%i Payment for %s" % (self.amount, self.debt)
+        return "%s paid $%i to %s for %s" % (
+            self.debt.debtor,
+            self.amount,
+            self.debt.creditor,
+            self.debt.item.name
+        )
 
 
 

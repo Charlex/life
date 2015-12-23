@@ -4,11 +4,11 @@
 {% block contents %}
 	<div class="detail">
 		<h2>{{ roomie.name }}</h2>
-		<div class="owed-amount"><h2>Owes ${{ roomie.total_owed|intcomma }}</h2></div>
+		<h3>Owes ${{ roomie.total_owed|intcomma }} and has paid ${{ roomie.total_paid|intcomma }}</h3>
 		<ul class="debts">
 			{% for debt in roomie.debts %}
 				<li class="{% if debt.paid_in_full %}paid-in-full{% endif %}">
-					${{ debt.amount_still_owed|intcomma }} owed to <u>{{ debt.creditor }}</u> for <u>{{ debt.item.name }}</u>. 
+					${{ debt.amount_still_owed|intcomma }} owed to <u>{{ debt.creditor }}</u> for <a href="/shit/detail?id={{ debt.item.pk }}"><u>{{ debt.item.name }}</u></a>. 
 				{% if debt.payments %} Paid ${{ debt.payment_sum|intcomma:2 }} of ${{ debt.amount }}.{% else %} No payments made. {% endif %}
 				</li>
 			{% endfor %}

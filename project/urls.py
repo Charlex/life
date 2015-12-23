@@ -11,7 +11,9 @@ urlpatterns = patterns('',
     # This is the URL Varnish will ping to check the server health.
     url(r'^app_status/$', 'toolbox.views.app_status', name='status'),
     url(r'^$', house_finance_view.index, name='index'),
-    url(r'^roommate/$', house_finance_view.detail, name='detail'),
+    url(r'^roommate/$', house_finance_view.roommie_detail, name='roommate-detail'),
+    url(r'^shit/$', house_finance_view.item_list, name='shit-list'),
+    url(r'^shit/detail/$', house_finance_view.item_detail, name='shit-detailed'),
 )
 
 if settings.DEBUG:

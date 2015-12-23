@@ -1,0 +1,23 @@
+{% extends 'house_finances/base.html' %}
+{% load humanize %}
+
+{% block contents %}
+	<div class="detail">
+		<h2>We are paying for this shit</h2>
+		<ul class="debts">
+			{% for item in unpaid_list %}
+				<li class="">
+					${{ item.amount_still_owed }} for <a href="detail?id={{ item.pk }}"><u>{{ item.name }}</u></a>. {% if item.payment_sum > 0 %}${{ item.payment_sum }} already paid.{% endif %}
+				</li>
+			{% endfor %}
+		</ul>
+		<h2>We paid for this shit</h2>
+		<ul class="debts">
+			{% for item in paid_list %}
+				<li class="">
+					<u>{{ item }}</u>
+				</li>
+			{% endfor %}
+		</ul>
+	</div>
+{% endblock %}

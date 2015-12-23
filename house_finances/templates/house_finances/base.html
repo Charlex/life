@@ -60,6 +60,9 @@
 				position: relative;
 				text-decoration: none;
 			}
+			.paid-in-full u {
+				text-decoration: line-through;
+			}
 			.container {
 				margin-top:50px;
 				padding:20px;
@@ -75,6 +78,15 @@
 				position: relative;
 				box-sizing:border-box;
 				min-height: 325px;
+			}
+			.detail a {
+				color: black;
+				display: inline-block;
+				padding: 0;
+			}
+			.detail a:hover {
+				color: #fff000;
+				background-color: black;
 			}
 			.owed-amount {
 				position: absolute;
@@ -109,6 +121,10 @@
 			.paid-in-full {
 				text-decoration: line-through;
 			}
+			.footer {
+				margin-top:400px;
+				margin-bottom:40px;
+			}
 			@media(max-width:1060px) {
 				h1 {
 					font-size: 90px;
@@ -132,18 +148,10 @@
 
 		        {% endblock %}
 	        </div>
-        </div>
-        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-        <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.10.2.min.js"><\/script>')</script>
 
-        <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
-        <script>
-            (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
-            function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;
-            e=o.createElement(i);r=o.getElementsByTagName(i)[0];
-            e.src='//www.google-analytics.com/analytics.js';
-            r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
-            ga('create','UA-XXXXX-X');ga('send','pageview');
-        </script>
+	        <div class="footer">
+	        	<a href="/admin/house_finances/">Edit</a>
+	        </div>
+        </div>
     </body>
 </html>

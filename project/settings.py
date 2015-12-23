@@ -72,9 +72,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
 
 # Web request stuff
 MIDDLEWARE_CLASSES = (
-    'django.middleware.cache.UpdateCacheMiddleware',
     'django.middleware.common.CommonMiddleware',
-    'django.middleware.cache.FetchFromCacheMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -100,6 +98,7 @@ INSTALLED_APPS = (
     'toolbox',
     'greeking',
     'house_finances',
+    'nested_inline'
 )
 
 # Logging

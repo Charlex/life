@@ -98,7 +98,8 @@ INSTALLED_APPS = (
     'toolbox',
     'greeking',
     'house_finances',
-    'nested_inline'
+    'nested_inline',
+    'priorities',
 )
 
 # Logging

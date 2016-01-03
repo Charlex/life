@@ -3,7 +3,6 @@ from django.utils.text import slugify
 from django.template.loader import render_to_string
 from django.conf import settings
 
-# This app is structured into roomies, items, and records of payments
 
 class LifeBase(models.Model):
     date_created = models.DateTimeField(auto_now_add=True, editable=False)
@@ -145,61 +144,3 @@ class Payment(LifeBase):
             self.debt.creditor,
             self.debt.item.name
         )
-
-
-
-# class Item(LifeBase):
-#     """
-#     An item that we all buy.
-#     """
-#     name = models.CharField(max_length=500)
-#     total_amount = models.IntegerField()
-#     bought_date = models.DateField(auto_now_add=True)
-
-#     def dollar_amount(self, amount=None):
-#         if amount is None:
-#             amount = self.total_amount
-#         return "$%i" % amount
-
-#     def split_up(self):
-#         roomie_count = len(Roomie.objects.all())
-#         return self.dollar_amount(self.total_amount / roomie_count)
-
-
-#     def payment(self):
-#         return RoomiePaysForItem.objects.get(item=self)
-
-#     def __unicode__(self):
-#         return self.name
-
-
-# class Payment(LifeBase):
-#     """
-#     A payment from a roomie for something else.
-#     """
-#     amount = models.IntegerField()
-#     roomie = models.ForeignKey(Roomie, related_name="+")
-
-#     form_of_payment = models.CharField(blank=True, max_length=500)
-
-#     note = models.TextField(blank=True)
-
-#     class Meta:
-#         abstract = True
-
-
-# class RoomiePaysRoomie(Payment):
-#     """
-#     A payment for roomie to roomie.
-#     """
-#     to_roomie = models.ForeignKey(Roomie, related_name="+")
-
-
-# class RoomiePaysForItem(Payment):
-#     """
-#     A payment for an item.
-#     """
-#     item = models.ForeignKey(Item)
-
-#     def __unicode__(self):
-#         return self.name

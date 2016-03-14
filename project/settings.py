@@ -99,8 +99,16 @@ INSTALLED_APPS = (
     'greeking',
     'house_finances',
     'nested_inline',
-    'priorities',
+    # 'priorities',
 )
+
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
+        'LOCATION': '127.0.0.1:11211',
+    }
+}
+
 
 # Logging
 MUNIN_ROOT = '/var/cache/munin/www/'

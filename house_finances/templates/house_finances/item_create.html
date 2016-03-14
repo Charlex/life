@@ -1,0 +1,121 @@
+{% extends 'house_finances/base.html' %}
+{% load humanize %}
+
+{% block extrastyles %}
+<style>
+    fieldset {
+        border: 0;
+        padding: 20px;
+        margin: 0;
+    }
+    h4 {
+        margin-top: 0;
+        margin-bottom: 10px;
+    }
+    label {
+        font-weight: bold;
+    }
+    input, select, .fake-input {
+        background: none;
+        border:2px solid black;
+        padding:10px;
+        font-size:18px;
+        border-radius: 0;
+        -webkit-appearance: none;
+        float:left;
+        margin-right:10px;
+    }
+    input[type="text"], input[type="number"] {
+        width: 120px;
+    }
+</style>
+{% endblock %}
+
+{% block contents %}
+<div class="detail">
+    <h2>Add new shit</h2>
+    <form id="create-form">
+        <fieldset>
+            <h4>Name</h4>
+            <label for="name"><input type="text" name="name" id="input-name" placeholder="Gas bill"></label>
+        </fieldset>
+        <fieldset>
+            <h4>Amount</h4>
+            <label for="name"><input type="text" name="name" id="input-name" placeholder="$100.00"></label>
+        </fieldset>
+        <fieldset>
+            <h4>Payer</h4>
+            <select name="year">
+                {% for roomie in roomies %}
+                    <option {% if roomie.name == "Charley" %}selected{% endif %}>{{ roomie.name }}</option>
+                {% endfor %}
+            </select>
+        </fieldset>
+        <fieldset>
+            <h4>Date</h4>
+            <select name="date-day">
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+                <option>6</option>
+                <option>7</option>
+                <option>8</option>
+                <option>9</option>
+                <option>10</option>
+                <option>11</option>
+                <option>12</option>
+                <option>13</option>
+                <option>14</option>
+                <option>15</option>
+                <option>16</option>
+                <option>17</option>
+                <option>18</option>
+                <option>19</option>
+                <option>20</option>
+                <option>21</option>
+                <option>22</option>
+                <option>23</option>
+                <option>24</option>
+                <option>25</option>
+                <option>26</option>
+                <option>27</option>
+                <option>28</option>
+                <option>29</option>
+                <option>30</option>
+                <option>31</option>
+            </select>
+            <select name="date-month">
+                <option>Jan</option>
+                <option>Feb</option>
+                <option>Mar</option>
+                <option>Apr</option>
+                <option>May</option>
+                <option>Jun</option>
+                <option>Jul</option>
+                <option>Aug</option>
+                <option>Sep</option>
+                <option>Nov</option>
+                <option>Dec</option>
+            </select>
+            <select name="year">
+                <option>2015</option>
+                <option selected>2016</option>
+                <option>2017</option>
+            </select>
+        </fieldset>
+        {% for roomie in roomies %}
+        <fieldset>
+            <h4>{{ roomie.name }} </h4>
+            <select name="roomie-{{ roomie.pk }}-type">
+                <option>Owes</option>
+                <option>Paid</option>
+            </select>
+            <input type="number" name="roomie-{{ roomie.pk }}-amount" id="input-roomie-{{ roomie.pk }}" placeholder="$100.00">
+            <span class="fake-input">to Charley</span>
+        </fieldset>
+        {% endfor %}
+    </form>
+</div>
+{% endblock %}

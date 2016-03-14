@@ -14,6 +14,7 @@ urlpatterns = patterns('',
     url(r'^roommate/$', house_finance_view.roommie_detail, name='roommate-detail'),
     url(r'^shit/$', house_finance_view.item_list, name='shit-list'),
     url(r'^shit/detail/$', house_finance_view.item_detail, name='shit-detailed'),
+    url(r'^shit/new/$', house_finance_view.item_create, name='shit-new'),
 )
 
 if settings.DEBUG:

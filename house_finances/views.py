@@ -8,9 +8,19 @@ def index(request):
     roomies = Roomie.objects.all()
     return render(
         request,
-        "house_finances/index.html", 
+        "house_finances/index.html",
         {"roomies": roomies}
     )
+
+
+def item_create(request):
+    roomies = Roomie.objects.all()
+    return render(
+        request,
+        "house_finances/item_create.html",
+        {"roomies": roomies}
+    )
+
 
 
 def roommie_detail(request):
